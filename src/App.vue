@@ -1,52 +1,44 @@
 <template>
-    <main role='main' class='movie-wrapper'>
-        <h1>{{ title }}</h1>
-        <movie v-bind:selected-movie='selectedMovie'></movie>
+    <main>
+        <table-sort
+            headline="Das ist die Headline"
+            :tableHead="[
+                {
+                    id: 'firstname',
+                    text: 'Vorname'
+                },
+                {
+                    id: 'lastname',
+                    text: 'Nachname'
+                },
+                {
+                    id: 'country',
+                    text: 'Land'
+                },
+
+            ]"
+            :tableBody="[
+                {
+                    firstname: 'Cristina',
+                    lastname: 'Coves Mora',
+                    country: '🇪🇸'
+                },
+                {
+                    firstname: 'Simon',
+                    lastname: 'Koch',
+                    country: '🇩🇪'
+                }
+             ]" />
     </main>
 </template>
 
 <script>
-    import Vue from 'vue'
-    import Movie from '@/components/Movie/Movie'
+    import TableSort from '@/components/TableSort'
 
     export default {
         name: 'app',
         components: {
-            Movie
-        },
-        data () {
-            return {
-                title: 'Movues: find your tonight\'s plan',
-                selectedMovie: {}
-            }
-        },
-        mounted () {
-            this.searchMovie(Vue.config.movues.FILM)
-        },
-        methods: {
-            searchMovie (movie) {
-                return window.fetch(`${Vue.config.movues.ENDPOINT}${movie}`)
-                    .then(response => response.json())
-                    .then(json => {
-                        this.selectedMovie = json
-                    })
-            }
+            TableSort
         }
     }
 </script>
-
-<style scoped>
-    .movie-wrapper {
-        height: 100vh;
-        max-width: 800px;
-        width: 90%;
-        margin: 0 auto;
-    }
-
-    .movie-wrapper > h1 {
-        font-weight: 300;
-        text-align: center;
-        margin: 0;
-        padding: 2rem;
-    }
-</style>

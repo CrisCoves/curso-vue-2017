@@ -1,4 +1,4 @@
-{
+ {
   "name": "movues",
   "version": "1.1.0",
   "description": "Movues, app for Vue course",
@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/EscuelaIt/curso-vue-2017#README",
   "scripts": {
+    "start": "npm run dev",
     "dev": "node build/dev-server.js",
     "build": "node build/build.js",
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
