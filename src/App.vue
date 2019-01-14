@@ -12,8 +12,8 @@
                     text: 'Nachname'
                 },
                 {
-                    id: 'country',
-                    text: 'Land'
+                    id: 'age',
+                    text: 'Alter'
                 },
 
             ]"
@@ -21,12 +21,22 @@
                 {
                     firstname: 'Cristina',
                     lastname: 'Coves Mora',
-                    country: '🇪🇸'
+                    age: 25
+                },
+                {
+                    firstname: 'Vicente',
+                    lastname: 'XYZ',
+                    age: 10
+                },
+                {
+                    firstname: 'Thomas',
+                    lastname: 'ABC',
+                    age: 28
                 },
                 {
                     firstname: 'Simon',
                     lastname: 'Koch',
-                    country: '🇩🇪'
+                    age: 24
                 }
              ]" />
     </main>

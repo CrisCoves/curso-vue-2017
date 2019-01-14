@@ -13,56 +13,45 @@
 </template>
 
 <script>
-export default {
-    name: 'TableSort',
-    props: {
-        headline: {
-            type: String,
-            required: false
-        },
-        tableHead: {
-            type: Array,
-            required: true
-        },
-        tableBody: {
-            type: Array,
-            required: true
-        }
-    },
-    data: function () {
-        return {
-            rows: this.tableBody
-        }
-    },
-    methods: {
-        toggleSort: function (column) {
-            this.rows.sort(this.compareValues(column))
-        },
+    import compareValues from '../js/compareValues';
 
-        // function for dynamic sorting
-        compareValues: function (key, order = 'asc') {
-            return function(a, b) {
-                if(!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
-                    // property doesn't exist on either object
-                    return 0;
-                }
+    export default {
+        name: 'TableSort',
+        props: {
+            // props = Properties
+            headline: {
+                type: String,
+                required: false
+            },
+            tableHead: {
+                type: Array,
+                required: true
+            },
+            tableBody: {
+                type: Array,
+                required: true
+            }
+        },
+        data: function () {
+            // data = Variables
+            return {
+                rows: this.tableBody,
+                activeColumn: '',
+                activeOrder: '',
+            }
+        },
+        methods: {
+            toggleSort: function (column) {
+                const order = this.activeOrder === 'asc' && column === this.activeColumn ? 'desc' : 'asc';
 
-                const varA = (typeof a[key] === 'string') ?
-                    a[key].toUpperCase() : a[key];
-                const varB = (typeof b[key] === 'string') ?
-                    b[key].toUpperCase() : b[key];
+                this.rows.sort(compareValues(column, order));
 
-                let comparison = 0;
-                if (varA > varB) {
-                    comparison = 1;
-                } else if (varA < varB) {
-                    comparison = -1;
-                }
-                return (
-                    (order == 'desc') ? (comparison * -1) : comparison
-                );
-            };
+                this.activeOrder = order;
+                this.activeColumn = column;
+            },
+        },
+        created: function() {
+            this.toggleSort(this.tableHead[0].id);
         }
     }
-}
 </script>
